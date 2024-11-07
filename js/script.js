@@ -21,4 +21,28 @@ function getComputerChoice() {
   return result;
 }
 
-getComputerChoice();
+
+
+function getHumanChoice() {
+  let repeat = true;
+  let choice;
+  
+  while (repeat) {
+    choice = prompt("Rock, Paper, or Scissors?").toLowerCase();
+    switch(choice) {
+      case "rock":
+        repeat = false;
+        break;
+      case "paper":
+        repeat = false;
+        break;
+      case "scissors":
+        repeat = false;
+        break;
+      default:
+        break;
+    }
+  }
+  return choice;
+}
+
