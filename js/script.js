@@ -75,13 +75,34 @@ function playRound(human, computer) {
     message = `Draw!`;
   }
   console.log(message);
-  
+  return humanScore, computerScore;
 }
 
-const humanChoice = getHumanChoice();
-const computerChoice = getComputerChoice();
+function announce (human, computer) {
+  let message;
+  if (human < computer) {
+    message = `You lose! Player: ${human} CPU: ${computer}`;
+  } else if (human > computer) {
+    message = `You win! Player: ${human} CPU: ${computer}`;
+  }
+  console.log(message);
+}
+
+function playGame() {
+  round = 0;
+  let humanChoice;
+  let computerChoice;
+  
+  while (round < 5) {
+    humanChoice = getHumanChoice();
+    computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
+    round++;
+  }
+  announce(humanScore, computerScore);
+}
 
 let humanScore = 0;
 let computerScore = 0;
 
-playRound(humanChoice, computerChoice);
+playGame();
