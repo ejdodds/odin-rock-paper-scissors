@@ -4,7 +4,9 @@ function getComputerChoice() {
   const scissors = 3;
   const max_number = 3;
   const min_number = 1;
+  // Generates random number from 1 to 3
   let choice = Math.floor(Math.random() * (max_number - min_number + 1)) + min_number;
+  // Placeholder for computer's choice
   let result;
   
   switch(choice) {
@@ -18,91 +20,121 @@ function getComputerChoice() {
       result = "scissors";
       break;
   }
+  
   return result;
-}
-
-
-
-function getHumanChoice() {
-  let repeat = true;
-  let choice;
   
-  while (repeat) {
-    choice = prompt("Rock, Paper, or Scissors?").toLowerCase();
-    switch(choice) {
-      case "rock":
-        repeat = false;
-        break;
-      case "paper":
-        repeat = false;
-        break;
-      case "scissors":
-        repeat = false;
-        break;
-      default:
-        break;
-    }
-  }
-  return choice;
 }
 
 
-function playRound(human, computer) {
-  let message;
-  if (human === "rock" && computer === "scissors") {
-    humanScore += 1;
-    message = `You win! Rock beats Scissors!`
-  } else if (human === "rock" && computer === "paper") {
-    computerScore += 1;
-    message = `You lose! Paper beats Rock!`
-  } else if (human === "rock" && computer === "rock") {
-    message = `Draw!`;
-  } else if (human === "paper" && computer === "rock") {
-    humanScore += 1;
-    message = `You win! Paper beats Rock!`
-  } else if (human === "paper" && computer === "scissors") {
-    computerScore += 1;
-    message = `You lose! Scissors beats Paper!`
-  } else if (human === "paper" && computer === "paper") {
-    message = `Draw!`;
-  } else if (human === "scissors" && computer === "paper") {
-    humanScore += 1;
-    message = `You win! Scissors beats Paper!`
-  } else if (human === "scissors" && computer === "rock") {
-    computerScore += 1;
-    message = `You lose! Rock beats Scissors!`
-  } else if (human === "scissors" && computer === "scissors") {
-    message = `Draw!`;
-  }
-  console.log(message);
-  return humanScore, computerScore;
-}
-
-function announce (human, computer) {
-  let message;
-  if (human < computer) {
-    message = `You lose! Player: ${human} CPU: ${computer}`;
-  } else if (human > computer) {
-    message = `You win! Player: ${human} CPU: ${computer}`;
-  }
-  console.log(message);
-}
-
-function playGame() {
-  round = 0;
-  let humanChoice;
-  let computerChoice;
+function playRound(human) {
   
-  while (round < 5) {
-    humanChoice = getHumanChoice();
-    computerChoice = getComputerChoice();
-    playRound(humanChoice, computerChoice);
-    round++;
+  let computer = getComputerChoice();
+  
+  if ((human === "rock" && computer === "scissors") || (human === "paper" && computer === "rock") || (human === "scissors" && computer === "paper")) {
+    
+    humanScore += 1;
+    humanScoreBoard.textContent = humanScore;
+    result.textContent = `You win! ${human} beats ${computer}!`
+    
+  } else if ((human === "rock" && computer === "paper") || (human === "paper" && computer === "scissors") || (human === "scissors" && computer === "rock")) {
+    
+    computerScore += 1;
+    computerScoreBoard.textContent = computerScore;
+    result.textContent = `You lose! ${computer} beats ${human}!`
+    
+  } else if ((human === "rock" && computer === "rock") || (human === "paper" && computer === "paper") || (human === "scissors" && computer === "scissors")) {
+    
+    result.textContent = `Draw!`;
+    
   }
-  announce(humanScore, computerScore);
+  
+  checkScore();
+  
 }
 
+
+function checkWinner() {
+  if (humanScore < computerScore) {
+    result.textContent = `Game Over... You lose...`;
+  } else if (humanScore > computerScore) {
+    result.textContent = `Congratulations! You won!`;
+  }
+  
+  finishGame();
+  
+}
+
+
+function checkScore() {
+  if (humanScore === 5 || computerScore === 5) {
+    checkWinner();
+  }
+}
+
+
+function finishGame() {
+  choices.forEach(choice => {
+    choice.setAttribute("disabled", " ")
+  });
+}
+
+
+function resetGame() {
+  result.textContent = `Welcome! Press START!`;
+  humanScore = 0;
+  computerScore = 0;
+  humanScoreBoard.textContent = humanScore;
+  computerScoreBoard.textContent = computerScore;
+  choices.forEach(choice => {
+    choice.setAttribute("disabled", " ");
+  })
+  buttonReset.setAttribute("disabled", " ");
+  buttonStart.removeAttribute("disabled");
+}
+
+
+function startGame() {
+  buttonStart.setAttribute("disabled", " ");
+  choices.forEach(choice => {
+    choice.removeAttribute("disabled");
+  })
+  buttonReset.removeAttribute("disabled");
+  result.textContent = "Choose to start the game";
+}
+
+
+// It's the initial state after the page loads
+function loadInitial() {
+  result.textContent = `Welcome! Press START!`;
+  choices.forEach(choice => {
+    choice.setAttribute("disabled", " ");
+  });
+  buttonReset.setAttribute("disabled", " ");
+}
+
+
+// Can't directly change the textContent property.
+let humanScoreBoard = document.querySelector(".humanScore");
+let computerScoreBoard = document.querySelector(".computerScore");
 let humanScore = 0;
 let computerScore = 0;
 
-playGame();
+const choices = document.querySelectorAll(".choices");
+choices.forEach(button => {
+  button.addEventListener("click", event => {
+    // Retrieves the choice button text
+    let choice = event.target.textContent.toLowerCase();
+    playRound(choice);
+  })
+})
+
+let result = document.querySelector(".result");
+
+const buttonStart = document.querySelector(".buttonStart");
+const buttonReset = document.querySelector(".buttonReset");
+
+buttonStart.addEventListener("click", startGame);
+buttonReset.addEventListener("click", resetGame);
+
+// Starts the page with this initial state after load
+document.addEventListener("load", loadInitial());
