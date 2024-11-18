@@ -89,17 +89,21 @@ function resetGame() {
     choice.setAttribute("disabled", " ");
   })
   buttonReset.setAttribute("disabled", " ");
+  buttonReset.style["display"] = "none";
   buttonStart.removeAttribute("disabled");
+  buttonStart.style["display"] = "inline";
 }
 
 
 function startGame() {
   buttonStart.setAttribute("disabled", " ");
+  buttonStart.style["display"] = "none";
   choices.forEach(choice => {
     choice.removeAttribute("disabled");
   })
   buttonReset.removeAttribute("disabled");
   result.textContent = "Choose to start the game";
+  buttonReset.style["display"] = "inline";
 }
 
 
@@ -110,6 +114,7 @@ function loadInitial() {
     choice.setAttribute("disabled", " ");
   });
   buttonReset.setAttribute("disabled", " ");
+  buttonReset.style['display'] = 'none';
 }
 
 
@@ -119,7 +124,7 @@ let computerScoreBoard = document.querySelector(".computerScore");
 let humanScore = 0;
 let computerScore = 0;
 
-const choices = document.querySelectorAll(".choices");
+const choices = document.querySelectorAll(".choices button");
 choices.forEach(button => {
   button.addEventListener("click", event => {
     // Retrieves the choice button text
