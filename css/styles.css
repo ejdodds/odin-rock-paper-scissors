@@ -6,14 +6,23 @@
   margin: 0;
 }
 
+
 body {
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  /* Color */
+  background-color: #4d4d4d;
+  color: #f2f2f2;
+  /* Typography */
+  font-family: sans-serif;
 }
 
+
 .container {
+  /* Alignment */
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -21,19 +30,19 @@ body {
   align-items: center;
 }
 
+
 .container-main {
-  
-  width: 50vw;
-  
+  /* Alignment */
+  min-width: 50vw;
   display: flex;
   flex-direction: column;
-  
+  gap: 16px;
+  padding: 16px;
+  /* Color */
+  border: 5px solid #e09b5f;
+  border-radius: 25px;
 }
 
-.container-choices {
-  flex: 1;
-  
-}
 
 .container-scoreBoard {
   display: flex;
@@ -41,47 +50,60 @@ body {
   align-items: center;
 }
 
+
 .scoreBoard {
   flex: 1;
-  
   height: 10vh;
   display: flex;
-  
   align-items: center;
   flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px;
 }
-
 
 
 .scoreBoard-human,
 .scoreBoard-computer {
-  
+  /* Alignment */
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
+  /* Typography */
+  font-size: 25px;
 }
+
 
 .container-result {
   display: flex;
   justify-content: center;
 }
 
+
 .result {
-  
+  /* Alignment */
   height: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   flex: 1;
+  /* Typography */
+  font-size: 20px;
+  /* Color */
+  background-color: #f2f2f2;
+  color: #4d4d4d;
+  border: 5px solid #232324;
+  border-radius: 25px;
 }
 
+
 .container-choices {
-  
+  flex: 1;
   display: flex;
   justify-content: center;
 }
+
 
 .choices {
   display: flex;
@@ -90,16 +112,25 @@ body {
   gap: 32px;
   flex-wrap: wrap;
   flex: 1;
-  min-width: fit-content;
 }
 
+
 .choices button {
-  width: 75px;
-  height: 75px;
+  width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* Color */
+  border: 5px solid #232324;
 }
+
+
+.small {
+  width: 100px;
+  height: 100px;
+}
+
 
 .container-options {
   display: flex;
@@ -110,7 +141,6 @@ body {
 
 
 .options {
-  
   flex: 1;
   height: 10vh;
   display: flex;
@@ -118,12 +148,29 @@ body {
   align-items: center;
 }
 
+
 .options button {
-  width: 50px;
-  height: 25px;
+  width: 100px;
+  height: 50px;
+  /* Typograohy */
+  font-size: 24px;
+  /* Color */
+  background-color: #f2f2f2;
+  color: #4d4d4d;
+  border-radius: 5px solid #232324;
+  border-radius: 50px;
 }
 
 
 .footer {
   text-align: center;
+  width: 100vw;
+  padding: 16px;
+  /* Color */
+  background-color: #f2f2f2;
+  color: #4d4d4d;
+  /* Typography */
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
 }
