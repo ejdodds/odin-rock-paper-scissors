@@ -128,7 +128,7 @@ const choices = document.querySelectorAll(".choices button");
 choices.forEach(button => {
   button.addEventListener("click", event => {
     // Retrieves the choice button text
-    let choice = event.target.textContent.toLowerCase();
+    let choice = event.target.id;
     playRound(choice);
   })
 })
